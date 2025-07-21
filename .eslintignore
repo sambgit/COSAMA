@@ -1,0 +1,6 @@
+node_modules/
+.next/
+dist/
+notes/
+prisma/
+tests-e2e/

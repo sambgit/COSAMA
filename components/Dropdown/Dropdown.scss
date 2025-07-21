@@ -1,0 +1,35 @@
+.dropdown {
+  @apply shrink-0;
+
+  &__container {
+    @apply relative flex justify-center items-center;
+  }
+
+  &__anchor {
+    @apply flex justify-between items-center p-1 ml-auto cursor-pointer;
+  }
+
+  &__menu {
+    @apply absolute invisible opacity-0 top-14 right-0 w-64 rounded-lg shadow-md overflow-hidden p-2;
+    @apply transition-opacity ease-in duration-300;
+    @apply bg-th-base-100 text-th-base-content;
+  }
+
+  &__menu--active {
+    @apply visible opacity-100;
+  }
+
+  &__list {
+    //
+  }
+
+  &__list-item {
+    & > * {
+      @apply block;
+    }
+
+    &:not(:last-child) {
+      @apply border-b border-th-base-200;
+    }
+  }
+}

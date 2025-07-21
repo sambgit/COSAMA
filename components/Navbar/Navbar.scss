@@ -1,0 +1,53 @@
+.navbar {
+  @apply fixed top-0 left-0 right-0 z-10;
+  @apply whitespace-nowrap border-b;
+
+  // theme styles
+  background-color: var(--navbar-bg-color, rgb(var(--base-100)));
+  color: var(--navbar-text-color, rgb(var(--base-content)));
+  border-color: var(--navbar-border-color, rgb(var(--base-200)));
+
+  &__desktop {
+    @apply flex justify-between px-4 h-[var(--navbar-height)];
+  }
+
+  &__left-wrapper {
+    @apply flex gap-4;
+  }
+
+  &__brand {
+    @apply flex;
+  }
+
+  &__brand-link {
+    @apply flex items-center gap-2;
+  }
+
+  &__logo {
+    @apply h-10 w-10;
+  }
+
+  &__brand-text {
+    @apply text-xl font-bold;
+  }
+
+  &__left-nav {
+    @apply hidden sm:flex items-center gap-2;
+  }
+
+  &__right-nav {
+    @apply flex items-center gap-2;
+  }
+
+  &__mobile-nav {
+    @apply p-4 flex flex-col gap-2 sm:hidden;
+  }
+
+  &__just-avatar-wrapper {
+    @apply mx-auto flex;
+  }
+
+  &__hamburger {
+    @apply rounded sm:hidden focus:outline-none focus:ring focus:ring-gray-500 focus:ring-opacity-50;
+  }
+}

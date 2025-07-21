@@ -1,0 +1,23 @@
+.search {
+  @apply flex justify-end;
+
+  &__form-field {
+    @apply flex flex-col max-w-[12.5rem];
+
+    & > input {
+      @apply w-full;
+    }
+  }
+
+  &__label-row {
+    @apply flex gap-2;
+  }
+
+  &__label {
+    @apply font-semibold;
+  }
+
+  &__text {
+    @apply text-gray-500;
+  }
+}

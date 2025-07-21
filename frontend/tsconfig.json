@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".", // this handles the root
+    // "paths": {
+    //   "@lib-server/*": ["lib-server/*"] // just placeholder for now
+    // },
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true, // true required for zod
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "strictNullChecks": true, // true required for prisma singleton mock
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules",
+    "notes",
+    "docs",
+    "dist",
+    ".next",
+    "next.config.js",
+    "prisma",
+    "themes",
+    "server",
+    "tests-e2e"
+  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
+}

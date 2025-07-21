@@ -1,0 +1,29 @@
+.error-fallback {
+  @apply flex justify-center items-center;
+
+  &--screen {
+    @apply h-screen w-screen;
+  }
+
+  &--page {
+    @apply min-h-[var(--available-content-min-h)] sm:min-h-[var(--available-content-min-h-sm)];
+  }
+
+  &--item {
+    @apply py-2 xs:py-0 xs:h-56 border border-th-base-200;
+
+    &:not(:last-child) {
+      @apply mb-4;
+    }
+  }
+
+  &__message {
+    & > span {
+      @apply mr-2;
+    }
+  }
+
+  &__label {
+    @apply font-bold;
+  }
+}

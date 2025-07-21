@@ -1,0 +1,22 @@
+.footer {
+  @apply h-[var(--footer-height)];
+  @apply bg-th-base-200 text-th-base-content;
+
+  @apply flex justify-between items-center px-4;
+
+  &__left-empty {
+    @apply inline-block w-10;
+  }
+
+  &__links {
+    @apply flex justify-between items-center gap-2;
+  }
+
+  &__author {
+    @apply inline-block w-36 sm:w-40 text-right font-bold;
+  }
+
+  &__seed-link {
+    @apply link-primary text-sm;
+  }
+}

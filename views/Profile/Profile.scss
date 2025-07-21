@@ -1,0 +1,36 @@
+.profile {
+  @apply flex flex-col gap-4;
+
+  &__user-card {
+    @apply border-x border-b border-th-base-200;
+    @apply -mx-[var(--layout-content-p)] sm:mx-0;
+  }
+
+  &__header-image {
+    @apply h-48 w-full relative;
+  }
+
+  &__user-info {
+    @apply relative p-4 pt-20 xs:pt-16;
+  }
+
+  &__username {
+    @apply text-gray-500;
+  }
+
+  &__date {
+    @apply text-sm text-gray-500;
+  }
+
+  &__avatar-wrapper {
+    @apply absolute -top-16 flex p-2 bg-th-base-100;
+  }
+
+  &__pagination-search {
+    @apply flex justify-between flex-wrap gap-2;
+  }
+
+  &__list {
+    @apply flex flex-col;
+  }
+}

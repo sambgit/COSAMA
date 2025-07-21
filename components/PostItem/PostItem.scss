@@ -1,0 +1,54 @@
+.post-item {
+  @apply flex flex-col gap-4 p-4 border-t border-x;
+  @apply border-th-base-200;
+
+  &:hover {
+    @apply bg-th-base-content bg-opacity-5;
+  }
+
+  &:last-child {
+    @apply border-b;
+  }
+
+  &__header {
+    @apply flex gap-4;
+  }
+
+  &__left {
+    @apply shrink-0;
+
+    & > a {
+      @apply flex;
+    }
+  }
+
+  &__main {
+    @apply flex flex-col;
+  }
+
+  &__user-title-desktop {
+    @apply hidden items-center gap-2;
+    @apply xs:flex;
+  }
+
+  &__user-title-mobile {
+    @apply flex items-center gap-2 flex-wrap;
+    @apply xs:hidden;
+  }
+
+  &__name {
+    @apply font-bold;
+  }
+
+  &__username {
+    @apply text-gray-500;
+  }
+
+  &__time {
+    @apply text-sm text-gray-500;
+  }
+
+  &__publish-delete {
+    @apply flex gap-4;
+  }
+}

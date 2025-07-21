@@ -1,0 +1,55 @@
+node_modules/
+.next/
+prisma/dev.db
+certs/
+dist/
+/**/tsconfig.tsbuildinfo
+yarn-error.log
+
+# postgres
+prisma/pg-data/data-*
+
+# very important
+/**/.env*.local
+/**/.env
+
+# Docker
+*.local
+docker-compose.override.yml
+
+# Logs
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# MacOS
+.DS_Store
+
+.env
+
+!uploads/avatars
+uploads/avatars/*
+!uploads/avatars/avatar0.jpg
+!uploads/avatars/avatar1.jpg
+!uploads/avatars/avatar2.jpg
+!uploads/avatars/avatar3.jpg
+!uploads/avatars/placeholder-avatar.jpg
+
+!uploads/headers
+uploads/headers/*
+!uploads/headers/placeholder-header.jpg
+!uploads/headers/header0.jpg
+!uploads/headers/header1.jpg
+!uploads/headers/header2.jpg
+!uploads/headers/header3.jpg
+!uploads/headers/header4.jpg
+
+# cypress
+tests-e2e/node_modules/
+tests-e2e/cypress/screenshots/
+
+# jest coverage
+coverage/

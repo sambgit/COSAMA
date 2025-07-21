@@ -1,0 +1,141 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - 'non-existing-branch-yet'
+  pull_request:
+    branches:
+      - 'non-existing-branch-yet'
+
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Run all tests locally on Ubuntu
+    timeout-minutes: 15
+    runs-on: ubuntu-22.04
+
+    # ignore all .env.* files, hardcode everything here
+    env:
+      # --------------- private vars - .env.local ---------------
+      # next-auth jwt
+      SECRET: CI_SECRET
+
+      # Facebook
+      FACEBOOK_CLIENT_ID: blank
+      FACEBOOK_CLIENT_SECRET: blank
+
+      # Google
+      GOOGLE_CLIENT_ID: blank
+      GOOGLE_CLIENT_SECRET: blank
+
+      # database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ci-db
+      POSTGRES_HOSTNAME: localhost
+      POSTGRES_PORT: 5432
+
+      # expand in first step
+      # DATABASE_URL: postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOSTNAME:$POSTGRES_PORT/$POSTGRES_DB?schema=public
+
+      # --------------- public vars - .env.test ---------------
+      APP_ENV: ci
+
+      PROTOCOL: http
+      HOSTNAME: localhost
+      PORT: 3001
+
+      # NEXTAUTH_URL: $PROTOCOL://$HOSTNAME:$PORT
+
+    services:
+      postgres:
+        image: postgres:14.3-bullseye
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Expand env variables
+        run: |
+          echo "DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_HOSTNAME:$POSTGRES_PORT/$POSTGRES_DB?schema=public" >> $GITHUB_ENV
+          echo "NEXTAUTH_URL=$PROTOCOL://$HOSTNAME:$PORT" >> $GITHUB_ENV
+
+      - name: Print env variables
+        run: |
+          echo "DATABASE_URL=$DATABASE_URL"
+          echo "NEXTAUTH_URL=$NEXTAUTH_URL"
+
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Print commit id and message
+        run: |
+          git show -s --format='%h %s'
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.13.1'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Migrate db schema
+        run: npx prisma migrate deploy
+
+      # --------------- check code quality ---------------
+
+      - name: Check types
+        run: yarn types
+
+      - name: Check lint
+        run: yarn lint
+
+      # --------------- run tests without db and running prod app ---------------
+
+      - name: Run client unit and integration tests
+        run: yarn test:client
+
+      # separate controllers and services
+      - name: Run server unit tests
+        run: yarn test:server:unit
+
+      # --------------- run tests with migrated db (without running prod app) ---------------
+
+      # integrated controllers with services
+      - name: Run server integration tests
+        run: yarn test:server:integration
+
+      # -------------- rerun all tests again to calc coverage (with database) ---------------
+
+      # all unit and integration tests for coverage
+      # disable it if you don't need it on each run
+      - name: Rerun all tests to calc code coverage
+        # if: ${{ false }}
+        run: yarn test:coverage
+
+      # --------------- run e2e tests with migrated db and with running prod app ---------------
+
+      - name: Build prod app for e2e tests
+        run: yarn build
+
+      # simplest way, has --project option
+      # ubuntu has all deps
+      - name: Run Cypress locally from dependencies
+        run: yarn test:e2e:headless

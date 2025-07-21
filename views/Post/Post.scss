@@ -1,0 +1,36 @@
+.post {
+  @apply flex flex-col gap-4 p-4;
+  @apply border border-th-base-200;
+
+  &__author {
+    @apply flex flex-col gap-4 xs:flex-row xs:justify-between;
+  }
+
+  &__author-card {
+    @apply inline-flex gap-4;
+  }
+
+  &__left {
+    @apply flex shrink-0;
+  }
+
+  &__right {
+    @apply flex flex-col;
+  }
+
+  &__name {
+    @apply font-bold;
+  }
+
+  &__username {
+    @apply text-gray-500;
+  }
+
+  &__post-created-at {
+    @apply text-sm text-gray-500;
+  }
+
+  &__publish-delete {
+    @apply flex xs:justify-end gap-4;
+  }
+}

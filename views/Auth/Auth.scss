@@ -1,0 +1,82 @@
+.auth {
+  @apply min-h-[inherit] w-full flex justify-center items-center;
+
+  &__content {
+    @apply flex flex-col gap-4 p-4 rounded-md;
+    @apply w-full max-w-xs xs:max-w-sm mx-4 xs:mx-0;
+    @apply bg-th-base-200;
+  }
+
+  &__header {
+    @apply flex justify-between items-center;
+  }
+
+  &__title {
+    @apply text-2xl font-bold;
+  }
+
+  &__home-link {
+    @apply link-primary text-sm;
+  }
+
+  &__form {
+    @apply flex flex-col gap-4;
+  }
+
+  &__test-accounts {
+    @apply text-sm;
+
+    p:first-child {
+      @apply mb-1;
+    }
+  }
+
+  &__table {
+    @apply table-auto text-left;
+
+    caption {
+      @apply font-semibold text-left mb-1;
+    }
+
+    th {
+      @apply font-semibold;
+    }
+
+    th,
+    td {
+      @apply pr-2 py-0;
+    }
+  }
+
+  &__form-field {
+    @apply flex flex-col;
+
+    & > input {
+      @apply w-full min-w-[200px];
+    }
+  }
+
+  &__oauth-buttons {
+    @apply flex flex-col gap-4;
+  }
+
+  &__facebook {
+    @apply bg-blue-500 hover:bg-blue-600 text-white;
+  }
+
+  &__google {
+    @apply bg-red-500 hover:bg-red-600 text-white;
+  }
+
+  &__link {
+    @apply text-sm;
+
+    & > span {
+      @apply mr-2;
+    }
+
+    & > a {
+      @apply link-primary;
+    }
+  }
+}

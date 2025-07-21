@@ -1,0 +1,37 @@
+.settings {
+  @apply flex flex-col gap-4;
+
+  &__form {
+    @apply flex flex-col gap-4;
+  }
+
+  &__form-field {
+    @apply flex flex-col;
+
+    &--header {
+      // @apply max-w-xs;
+    }
+
+    &--input {
+      @apply max-w-xs;
+      & > input {
+        @apply w-full;
+      }
+    }
+
+    &--avatar {
+      @apply self-start;
+    }
+
+    &--bio {
+      @apply max-w-xl;
+      & > textarea {
+        @apply w-full;
+      }
+    }
+  }
+
+  &__buttons {
+    @apply max-w-md flex gap-4;
+  }
+}

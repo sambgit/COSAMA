@@ -1,0 +1,66 @@
+version: '3.8'
+
+# for api integration tests (with db) - use as is
+# for Cypress e2e tests - is base to extend
+
+services:
+  npb-app-test:
+    # image name, set it everywhere
+    image: npb-app-test
+    container_name: npb-app-test
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    # container:app-process
+    ports:
+      - '3001:3001'
+    # user: '${MY_UID}:${MY_GID}'
+    volumes:
+      # no src in Dockerfile, only via mount
+      # must see src changes, frontend build prod
+      # to avoid rebuilding container on src change
+      - ./:/app
+      - npb-app-test-node_modules:/app/node_modules
+      - npb-app-test-next:/app/.next
+      - npb-app-test-dist:/app/dist
+    env_file:
+      - ./envs/test-docker/.env.test.docker
+      - ./envs/test-docker/.env.test.docker.local
+    depends_on:
+      - npb-db-test
+    networks:
+      - internal-test
+
+  npb-db-test:
+    image: postgres:14.3-bullseye
+    container_name: npb-db-test
+    restart: unless-stopped
+    # entrypoint: sh -c 'whoami && id'
+    # change internal port
+    command: postgres -p 5435
+    user: '${MY_UID}:${MY_GID}'
+    # expose it to host
+    ports:
+      - '5435:5435'
+    volumes:
+      - ./prisma/pg-data:/var/lib/postgresql/data
+    # only: POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB
+    environment:
+      - PGDATA=/var/lib/postgresql/data/data-test
+    env_file:
+      - ./envs/test-docker/.env.test.docker.local
+    networks:
+      - internal-test
+      - external-host
+
+volumes:
+  npb-app-test-node_modules:
+  npb-app-test-next:
+  npb-app-test-dist:
+
+networks:
+  internal-test:
+    external: false
+  # for adminer dev d-c
+  external-host:
+    external: true

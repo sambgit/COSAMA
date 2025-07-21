@@ -1,0 +1,52 @@
+
+# use alpine for tests like prod
+ARG BASE=node:16-alpine
+
+# simplified prod build
+# migrate, seed, build
+#---------------------
+
+FROM ${BASE} AS dependencies
+
+RUN whoami && id
+
+# openssl for prisma client, bash for jest-preview
+RUN apk update && apk add --no-cache openssl libc6-compat bash
+
+WORKDIR /app
+ENV NODE_ENV development
+
+# prepare only node_modules and prisma client
+# src will be mounted via volume
+# build at runtime, not here
+COPY package.json yarn.lock ./
+COPY prisma ./prisma
+
+# dev dependencies for api integration testing
+RUN yarn install
+RUN npx prisma generate
+
+RUN rm -rf prisma
+
+ENV NODE_ENV test
+
+# volumes folders must be created and chowned before docker-compose creates them as root
+# create them during docker build
+RUN mkdir -p .next dist
+RUN chown node:node . node_modules .next dist
+RUN chown -R node:node node_modules/.prisma
+
+USER node
+
+# on container
+EXPOSE 3001
+# env for app
+ENV PORT 3001
+
+# build app at runtime, not here
+# api integration tests dont need built prod app, Jest runs code
+
+# 1. migrate prod, 2. build app, 3. start prod
+# default: just 1. migrate and shut down - for integration tests
+# for e2e: 1, 2 and 3
+CMD [ "yarn", "prisma:migrate:prod" ]

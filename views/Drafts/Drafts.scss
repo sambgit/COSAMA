@@ -1,0 +1,7 @@
+.drafts {
+  @apply flex flex-col gap-4;
+
+  &__list {
+    @apply flex flex-col gap-4;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "baseUrl": "http://localhost:3001",
+  "chromeWebSecurity": false,
+  "video": false,
+  "env": {
+    "COOKIE_NAME": "next-auth.session-token"
+  }
+}

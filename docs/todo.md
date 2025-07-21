@@ -1,0 +1,348 @@
+# Tasks
+
+## Todo
+
+- logging
+- tests, next examples
+- ci cd, deploy
+- readme
+- tailwind and root font-size 10px 1rem, global and component styles
+- react query, redux toolkit, redux toolkit query
+- redux toolkit vercel example
+- update readme before forget...
+- try catch to prisma calls getServerSideProps...
+- semantic html
+- Next.js Image config
+- post - hero image, tag, category
+- comments model
+- drafts count in session or user state
+- typescript silent errors...
+- on change tw-base.scss must restart, no intelisense for my utilities
+- docker express maybe, github actions, remote containers
+- add prisma migration container, move prisma to devDependencies
+- next.js multiple build contexts, next.js app, server.ts and seed.js
+- heroku docker
+- update traefik-proxy readme
+- me query, only userId and email in session
+- throw 404 from zod api...
+- handle errors in getServerSideProps
+- edit user, delete user - admin
+- validate ids in api zod
+- test `await queryClient.prefetchQuery([QueryKeys.POSTS_PROFILE, profile.username, 1]...`
+- reusable guard or HOC for protected routes, getServerSideProps too
+- where to go next doc: markdown editor with image inline and upload, comments, likes, follow, tags, categories
+- extract clear types in a single place, form, request, response, api - models, organize, consistent naming
+- maybe arrays in navbar for mobile
+- declarative navbar lesson
+- tests
+- drafts count in me
+- all in daisy ui
+- @tailwindcss/line-clamp plugin to limit posts length
+- custom font maybe
+- footer styling
+- login neutral button color, dark theme
+- active button border, focus ring...
+- Next images
+- wrong password server response on login page
+- client error handling, axios interceptor, alert component
+- throw errors in all api
+- remove safeParse(query), let it throw
+- custom favicon, seo meta tags
+- resize images on server, lovell/sharp
+- mount only pg-data and remove prisma files from traefik repo
+- skeletons, just in docs
+- maybe shell script for migration container
+- postgres expose external env var in d-c.yml
+- new next.js dockerfile? https://nextjs.org/docs/advanced-features/output-file-tracing
+- add role attributes for accessibility in one go, a11...
+- update resume react testing
+- find practical github repo code example for jest and cypress
+- check additional Eslint rules from other repositories
+- setup Cypress
+- mocks, spies, describe
+- unit, integration
+- skeletons, react suspense
+- work organization md doc
+- remove password from all client users, done
+- handle http error in HomeView, both getServerSideProps and useQuery, ErrorBoundary, error handling and error testing same thing
+- each form should be separate component, easier to test
+- one youtube lesson for english
+- container with vs code for replicating bugs - Gitpod Self-Hosted container
+- testing-lib/react-hooks ReactDom warning
+- kill next.js server on unhandled promise rejection
+- supertest pass dynamic route arg `/api/posts/:id`, maybe exists nicer solution {id}
+- change all ports from 3001 to 3000
+- default theme fallback
+- run docker-compose as non root to avoid mount folders as root, app-dev, app-test containers...
+- user in Cypress container for screenshots as non root
+- update to Cypress 10
+- fix contains direct node access warning in lint
+- fix .next and dist folders created as root in app container if not exists (pass non-root user UID, GID)
+- withBem() needs proper solution for additional classname scoped under block, no this just generates classNames in html, without dot, not in js
+- version docker images in Github Actions, and app release
+- see what queries return results on server too, log them in node
+- debug in hook with `console.log('query.data', query.data, isBrowser());`
+- add Github Action workflow for releases, see some existing example
+- print tag too in build docker and deploy workflows
+- handle same Facebook Google email explicitly
+- fix default theme on mobile navbar, ThemeChanger is not mounted
+
+### Overview
+
+- update to Node 18, Next.js new routing
+- create release and tag v1.0 when finish readme
+- hydration bug - dependant queries, me and others
+- image backend
+- ask to record tutorials
+- free Docker build from build time urls (CustomHead)
+- next-translations
+- known issues: hydrate bug, Image backend
+
+### Bugs
+
+- test-case for react hydration bug
+- comment out one by one component to isolate it
+
+### Questions
+
+- use yarn scripts in Dockerfile or direct commands?
+- handle same google and facebook email, it crashes prod app, ask on next-auth discussions
+- error path, db function, getServerSideProps, api endpoint, ask reddit, github
+- where to place and call printLoadedEnvVariables() ?
+- absolute positioning or negative margin, css reddit question
+- jest.mock() vs jest.spyOn()?
+- exports from index.ts
+- ReactElement vs JSX.Element vs ReactNode, ask this
+- types for reusing Login and Register form
+- fix FormData useUpdateuser hook test
+- fix act not supported in env
+- screenshots for all items (mutations), pages, screen error handling and alerts
+- supertest vs axios?
+- clearMocks vs resetMocks vs restoreMocks
+- void vs undefined return type function?
+- getServerSideProps http vs direct service calls?
+- next.js startup handler where?
+- ask NODE_ENV=ci or test in Github Actions? reddit
+- read axios error message RQ error handlers, ask in axios discussions
+- edit user button leads to Home???, why this must be like this `const settingsHref = '${Routes.SITE.SETTINGS}${user.username}/'` or hard refresh
+
+## Done
+
+- admin role - done, maybe type admin | user in prisma
+- middleware folder, withProtect, withRoles - done
+- disable prisma seed before migrate - done
+- error handling, next-connect - almost done
+- rethink routes, extract - done
+- fix User type - done
+- migrate to axios, fetch has no progress, done
+- add types file, mostly done
+- fix routing from Post, done
+- vs code recommended extensions, done
+- install icons, done
+- navbar, done
+  - responsive, hamburger
+  - avatar dropdown
+- update next and everything else, done
+- faker content, reseed, clean files, done
+- settings form header dropzone, repeat password, done
+- style forms, hero img upload, done
+- icons in navbar items, done
+- global styles button, links..., done
+- footer, done
+- problem: seed is buggy? solution: prisma 3 has bug with Promise.all([...]), use await, await, await..., done
+- traefik container reverse proxy, done
+- fix remaining forms, done
+- sqlite to postgres, done
+- dev, prod remove express https, done
+- docker, done
+- validation server, client, example [with-joi](https://github.com/vercel/next.js/tree/canary/examples/with-joi), [next-joi](https://github.com/codecoolture/next-joi), done with zod
+- extract styles, tailwind, next examples, done
+- query key in getServerSidePropa and useQuery and type it, done
+- mutations, done
+- progressbar tailwind div, done
+- edit post, done
+- create docs folder with mds, done
+- fix theme reset on mobile menu, done
+- route guards - redirect from getServerSideProps, done
+- search fetching... indicator, done
+- link to home on login page, done
+- router.back() on cancel, done, styling href link,active...
+- outside click close mobile menu, done
+- mobile text wrap user, username, time, fix with flexbox, done
+- responsive pagination and search, done
+- dark theme, red, green, theme colors, daisy ui, done
+- fix tailwind utility classes error, done
+- users page, pagination, api filtering, done
+- pagination with prisma and react query, done
+- add search posts field, done
+- full text search posts, done
+- fix 1px border-bottom navbar calculation, done
+- white border on pagination transparent button css bug, done
+- alert component, done
+- leave just id and email in session.user, and type, done
+- refetch session after user is edited, done
+- redirect on protected pages, logged in and admin cases - reusable guards, getMe() + if is enough
+- protected routes and 404 pages, handled in getServerSideProps
+- handle fb, google and local avatars, handled with isUrl()
+- more color themes and navbar gradient, done
+- 404 and 500 pages, done
+- search and pagination responsive css, done
+- \_document.tsx, CustomHead, seo, done
+- publish/unpublish checkbox in update, no
+- replace session.user on server, done
+- group pagination items function, no
+- soft delete for reseed, or logger, no
+- msw not called at all?, done
+- maybe put uploads paths in Routes object, done
+- seed link in footer, done
+- fix loading... escape . regex `await waitForElementToBeRemoved(() => screen.getByText(/loading\.\.\./i));`, done
+- test Settings view, done
+- userEvent Auth and Home, done
+- AuthView all await userEvent wrapped in act(), why?, done
+- delete 4. user on new page, force prerender, change page - current page state in component `data.pagination.total page useEffect calc` in Profile and Users, done useDecrementPage
+- on delete user cascade posts not working, posts remain, done
+- setup logged in user in test-utils render, done
+- msw, done
+- msw param routes, done
+- reseed app button in footer, done
+- user context and provider, done
+- fix Settings password Zod, solution: Zod is fine, prevent Firefox from prepopulating saved password `<input autoComplete="new-password" />`, done
+- implement Spinner loader, done
+- remove padding top from PageLayout, recalculate min-height for content h-100%, done
+- zod validate ids, done
+- remove padding on profile sm, layout no horizontal padding prop, done
+- me in QueryCache in getServerSideProps, no, should be client side if updated on client, just whole screen loader, wont do
+- fix me refetch after login, done
+- throw from all api's zod..., ZodError to ApiError convert fn, done
+- types, models folder, done
+- types in api `handler.get(async (req: NextApiRequest, res: NextApiResponse<PostWithAuthor>)`, done
+- fix types `yarn type-check`, Navbar ReactNode, ReactElement, JSX.Element [], done
+- reuse ErrorCard for boundaries, 500 and 404, done
+- global responsive fonts bellow xs, done
+- fix waitFor for renderHook, done
+- fix tests after MeContext, done
+- hooks tests renderHook from rtl instead of rtl/react-hooks, done
+- remove all Loading, disable ErrorBoundaries on some mutations, done
+- add Suspense and ErrorBoundaries to test wrapper, done
+- fix waitFor(loading) in components, done
+- fix dropdown outside click, reused in navbar too, on 2 places, done
+- maybe install `react-use` package, no
+- seed redirect Home, signOut() redirects, needs localStorage, probably not
+- migrate react query to v4, react 18, done
+- hide login blink, fixed by itself, done
+- switch blue theme as default, set as env variable, done
+- react query error handling, axios interceptor, 4 states, done
+- fix test lint errors on build, disabled for now
+- Suspense, ErrorBoundary, test with api 400, ssr works then csr fails..., done
+- error tests, now i have ErrorBoundaries and error handling, done
+- node tests, done
+- cypress config and test, done
+- api integration tests with Supertest, setup teardown db seed, done
+- seed and teardown tasks called but dont work from Cypress?, both work as yarn script, wrong database and .env file, dev, done
+- register test fails? useUser invalid id, solution: i had to log out by clearing cookies, done
+- check avatars and headers folder exists in seed.js, done
+- pg-data volume as non root, done
+- extend docker-compose.yml test, e2e, done
+- remove docker multistage Dockerfile dev, test and e2e, done
+- lib-client/constants.ts in typescript cypress import?, done, 2 tsconfig.json files
+- CORS error 3001 3005, whitelist maybe, run tests on 3001 for now, dont do this
+- fix typesctipt `strict` and `strictNullChecks`, done
+- migrate db, `prisma:migrate:test:env` for integration tests, nothing to do
+- parse FormData for test, done
+- move permission logic from services to controllers and middleware, done
+- Github Actions lint, typescript, all tests, done
+- tests with `errorHandler500()` - 4, done
+- `userEvent.clear()` broken - 1, done
+- alpine doesnt have bash for jest-preview, done
+- fix act in Home, done
+- NEXT_PUBLIC_BASE_URL without '/', no, nowhere it is trimmed
+- \_error.tsx, Custom500.tsx pages?, done
+- rewrite yarn scripts with :, script.sh, done
+- throw on undefined env vars on app startup, done
+- reuse env script in yarn `"blank-script": "dotenv -e .env.local -- sh -c 'echo $DATABASE_URL'"`, dotenv discusions ???, done
+- profile link doesnt rerender from user1 to user0, useMemo in MeProvider, true, path in deps?
+- clean yarn scripts, done
+- getStaticProps in login and register, no, MeProvider..., done
+- APP_ENV for GA, nothing to do, done
+- pass new files in docker-compose.yml and yarn scripts, done
+- handle APP_ENV in server.ts, nothing to do, done
+- automatize everything with .gitpod.yml, done
+- gitpod and replit dev environments, APP_ENV, and heroku db, done
+- APP_ENV for GA, done
+- Cypress Docker, done
+- yarn scripts, done
+- Github Actions tests, lint, type-check, format, done
+- fix remaining tests, done
+- certs files not found logic in server.ts, done
+- update packages, done
+- set `"og:url"` in Head with Javascript, remove env var, no, must be same on SSR and CSR
+- node env?, done
+- rename request models for services, done
+- empty state, home, profile... data.items: [], done
+- return ClientUser from all api endpoints, done
+- test form, node api, cypress, ci, error 500, done
+- zod.safeParse.error type, done
+- SettingsView test fails because of react-hook-form, done
+- add seed Postgres container inside Github Actions directly, done
+- docblocks in api functions, no
+- Google profile not found `https://localhost:3001/google_user_cl4tpvliv0020s0pn5lt41q7s/`, trimmed to first 6 chars in next-auth, done
+- settings google avatar fails, paceholder, profile too, only when im logged out or other user, maybe download avatar, done
+- google avatar fails too 403 forbidden, must bypass imageLoader for http:// ? `Rate-limit exceeded That’s all we know.`, fixed, just forward src in imageLoader for full url, dont touch Image component, done
+- facebook login fails, it works, just **must not use same email** with google, maybe handle that in next-auth if its worth it
+- update callback url on Facebook and Google for Oracle, done
+- test if prod build and start works without NEXTAUTH_URL, done
+- change image in settings doesnt work, done
+- fix errors: settings form reset, done
+- use `environment:` instead of `env_file:` in docker-compose.live.yml, done
+- single .env file for live...?, done
+- add d-c.live.yml with dockerhub image, done
+- yarn scripts to build and push live image to dockerhub, done
+- test devcontainers, done
+- settings image after update again, header, done
+- profile reset to first page, other user, done
+- navbar avatar deformed, done
+- center github button mobile, done
+- fix button height on UserItem mobile, done
+- fix avatar absolute top on UserItem mobile, done
+- gitpod doesnt run initial command from yml, maybe needs new workspace, yes, done
+- build, up, down scripts, docker:test:up?, done
+- build and test containers with new envs, dev, prod, live, test, e2e, done
+- deploy new production, done
+- handle same email facebook and google, its ok, new user doesnt succeed
+- prevent admin to delete himself, done
+- layout height on mobile Chrome, Create page has unwanted scroll, Chrome debug, its because of focus on input that triggers wrong scroll, correct scroll is outside of page, it was autoFocus on textfield
+- setup Github Actions for tests, done
+- separate test config for react and backend api, done
+- handle success, loading, error, empty states, done
+- ErrorBoundary, Suspense loading, done
+- tests: render 200 and 500, mutation, component - unit, forms, hooks, API backend, cypress with real db, done
+- Github Action CI for tests, done
+- hooks error tests (and handling), done
+- avatar thrown out of the form state??? form.reset() not working..., done
+- rewrite yarn scripts, done
+- uploadsImageLoader when src isUrl...?, google, fb avatar?, should be ok?, done
+- prevent test env logs in GA, done for client
+- Prisma 4, done
+- on backend prevent to read drafts from other user, done
+- can see draft post by id, done
+- deploy, comment out page suspense, no need, done
+- on post page if delete draft redirect to drafts page, done
+- **hydration error - big difference in query keys in getServerSideProps and useQuery on client**
+- query keys arent matching in getServerSideProps and useQuery CSR, profile e.g.
+- try enabled false to preview csr and ssr, no
+- all props in UserItem available at same time, fixes it, {user, me}
+- block all UI until all data is ready, Navbar for example
+- block navbar rendering, done, revert, gives more errors
+- test coverage setup, done
+- write yarn script to run all tests for coverage and add to tests.yml, done
+- issue (bug, feature) template, pull request template, code of conduct, done
+- record video (maybe Cypress) gif or youtube embed in readme, done
+- code coverage setup, done
+- deployment with ssh actions, done
+- docker volume folders as non root pg, done
+- badges in readme, done
+- contributing, done
+- open issue, known issues, lighthouse screenshot, done
+- documentation, mobile screenshots, done
+- mobile screenshots, done
+- tag and release, done

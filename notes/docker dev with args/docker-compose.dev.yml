@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  nextjs-prisma:
+    container_name: nextjs-prisma-dev
+    user: '${UID}:${GID}'
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        ARG_UID: ${UID}
+        ARG_GID: ${GID}
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./:/app
+      - np-dev-node_modules:/app/node_modules
+      - np-dev-next:/app/.next
+    env_file:
+      - .env.development
+      - .env.local
+    #
+    #
+#     network_mode: service:postgres-db
+
+#   postgres-db:
+#     image: postgres:14-alpine
+#     container_name: postgres-db-dev
+#     restart: unless-stopped
+#     ports:
+#       - 5432:5432
+#     env_file:
+#       - .env.local
+#     volumes:
+#       - ./prisma/pg-data:/var/lib/postgresql/data
+
+volumes:
+  np-dev-node_modules:
+  np-dev-next:
