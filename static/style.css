@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+* {
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar {
+  background-color: rgb(21, 61, 128);
+  color: white;
+  z-index: 1;
+  box-shadow: 10 20px 10px rgba(0,3,0,0.1);
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  position: fixed;
+  width: 100%
+}
+.navbar .logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1em;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+
+body {
+  display: inline;
+  padding-top: 100px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #eff0f4;
+}
+
+.drop {
+  position: relative;
+  margin: 40;
+  top: 20;
+  width: 350px;
+  height: 500px;
+  box-shadow: inset 20px 20px 20px rgba(0, 0, 0, 0.05),
+              25px 35px 20px rgba(0, 0, 0, 0.05),
+              25px 30px 30px rgba(0, 0, 0, 0.05),
+              inset -20px -20px 25px rgba(255, 255, 255, 0.9);
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 62% 38% 24% 76% / 59% 60% 40% 41%;
+}
+
+.drop:hover {
+  border-radius: 50%;
+}
+
+.drop::before,
+.drop::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.9;
+}
+
+.drop::before {
+  top: 50px;
+  left: 85px;
+  width: 35px;
+  height: 35px;
+}
+
+.drop::after {
+  top: 85px;
+  left: 110px;
+  width: 15px;
+  height: 15px;
+}
+
+.container{
+  display: flex;
+  flex-direction : column;
+  align-items : center;
+  gap: 3em;
+  position: relative;
+  left: -40px;
+  top: 3em;
+  background-color: none
+}
+
+.content {
+  position: relative;
+  display: grid;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 10px;
+  gap: 15px;
+  top: 0px;
+
+}
+
+.content h2 {
+  color: #143D80;
+  font-size: 1.5em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  position: relative;
+  width: 225px;
+  border-radius: 25px;
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.1),
+              inset -2px -5px 10px rgba(255, 255, 255, 1),
+              15px 15px 10px rgba(0, 0, 0, 0.05),
+              15px 10px 15px rgba(0, 0, 0, 0.025);
+}
+
+.input::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px 15px;
+}
+
+input, select {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 1em;
+  padding: 10px 15px;
+}
+
+select {
+  appearance: none;
+  color: #333;
+}
+
+input:hover{
+  text-transform: uppercase;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+input[type="submit"] {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1em;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.input:last-child {
+  width: 120px;
+  background: #00b4d8;
+  transition: 0.5s;
+}
+
+.input:last-child:hover {
+  width: 150px;
+}
+
+.btn {
+  position: absolute;
+  right: -63px;
+  bottom: 0;
+  width: 120px;
+  height: 120px;
+  background: #0077b6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  line-height: 2.2em;
+  letter-spacing: 0.01em;
+  font-size: 0.8em;
+  transition: 0.25s;
+  text-align: center;
+  box-shadow: inset 10px 10px 10px rgba(0, 180, 216, 0.05),
+              15px 25px 10px rgba(0, 180, 216, 0.1),
+              15px 20px 20px rgba(0, 180, 216, 0.1),
+              inset -10px -10px 15px rgba(255, 255, 255, 0.5);
+  border-radius: 44% 56% 65% 35% / 57% 58% 42% 43%;
+}
+
+.btn.signup {
+  bottom: 150px;
+  right: -80px;
+  width: 80px;
+  height: 80px;
+  background: #90be6d;
+  border-radius: 49% 51% 52% 48% / 63% 59% 41% 37%;
+}
+
+.btn:hover {
+  border-radius: 50%;
+}
+
+.section{
+    padding: 3em;
+    background-color: #eff0f4;
+    margin: 1em auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    width: 100%
+
+}
+
+.section h2{
+    text-align: center;
+    margin-bottom: 1em;
+    color: #143D80;
+}
+
+ /* Bouton hamburger */
+ .menu-toggle {
+  display: none;
+  font-size: 1.8em;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+ }
+
+footer {
+  text-align: center;
+  padding: 1em;
+  background-color: rgb(21, 61, 128);
+  color: white;
+  margin-top: 2em;
+}
+
+footer.marque{
+    position: relative;
+    left: 0
+}
+
+@media (max-width: 768px) {
+  .menu-toggle{
+    display: block
+  }
+  .nav-links {
+    align-items:center;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgb(21, 61, 128);
+    padding: 1em;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 998;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+    max-height: 0;
+  }
+
+  .nav-links.show {
+    display: flex;
+    max-height: 500px;
+  }
+
+  .nav-links li a {
+    padding: 0.8em;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    text-align: center
+  }
+
+  /* Container */
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    left: 0;
+    top: 2em;
+    padding: 1em;
+  }
+
+  /* Formulaire goutte */
+  .drop {
+    width: 90%;
+    height: auto;
+    border-radius: 20px;
+    padding: 2em;
+  }
+
+  .content {
+    padding: 0;
+    gap: 1em;
+  }
+
+  .input {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  input, select {
+    font-size: 1em;
+    padding: 12px;
+  }
+
+  input:hover,
+  select:hover {
+    transform: scale(1.03);
+  }
+
+  /* Boutons flottants */
+  .btn,
+  .btn.signup {
+    position: static;
+    margin: 1em auto;
+    width: 80%;
+    height: auto;
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 12px;
+  }
+
+  /* Section À propos */
+  .section {
+    margin: 2em auto;
+    padding: 2em;
+    max-width: 90%;
+    text-align: center;
+  }
+
+  .section h2 {
+    font-size: 1.4em;
+  }
+
+  .section p {
+    font-size: 1em;
+    line-height: 1.6;
+  }
+}
+

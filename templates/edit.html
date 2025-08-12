@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modifier Réservation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_list.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Modifier la réservation</h1>
+    <form action="/edit/{{ res[0] }}" method="post">
+      <label>Prénom
+        <input type="text" name="prenom" value="{{ res[1] }}" required />
+      </label>
+      <label>Nom
+        <input type="text" name="nom" value="{{ res[2] }}" required />
+      </label>
+      <label>Téléphone
+        <input type="text" name="tel" value="{{ res[3] }}" required />
+      </label>
+      <label>NIN
+        <input type="text" name="nin" value="{{ res[4] }}" required />
+      </label>
+      <button type="submit" class="button">Enregistrer</button>
+      <a href="/admin" class="button">Annuler</a>
+    </form>
+  </div>
+</body>
+</html>

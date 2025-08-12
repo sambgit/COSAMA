@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modifier Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Modifier la réservation</h1>
+        <form action ="/edit_admin/{{ sup_admin[0] }}" method="post">
+            <label>Non d'utilisateur
+                <input type="text" name="new_username" value="{{ sup_admin[1] }}" />
+            </label>
+            <label>Mot de pase
+                <input type="password" name="new_password" value="{{ sup_admin[2] }}" />
+            </label>
+            <button type="submit">Enregistrer</button>
+            <a href="/super_admin" class="button">Annuler</a>
+        </form>
+    </div>
+</body>
+</html>

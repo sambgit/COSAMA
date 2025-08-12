@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connexion Administrateur</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+  <div class="wrapper">
+    <form action="/login" class="form" method="post">
+        <h1>Login Administrateur</h1>
+        <div class="inp">
+            <input type="text" name="username" required class="input" placeholder="Nom d'utilisateur"/>
+            <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="inp">
+          <input type="password" name="password" class="input" placeholder="mot de passe">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+      <button type="submit">Se connecter</button>
+    </form>
+    <div></div>
+        <div class="banner">
+            <div class="logo">
+              <img src="{{url_for('static', filename='images/logo_cosama.ico')}} " alt="Logo Cosama" >
+            </div>
+        </div>
+  </div>
+</body>
+</html>

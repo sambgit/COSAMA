@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cosama – Liaison Maritime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='images/logo_cosama.ico') }}" alt="Logo Cosama">
+      <span>Cosama</span>
+    </div>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/home">Accueil</a></li>
+      <li><a href="/">Réserver</a></li>
+      <li><a href="#stats">Chiffres</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header id="accueil" class="hero">
+    <h1>Voyagez en toute sécurité entre Dakar et Ziguinchor</h1>
+    <p>Réservez votre billet en ligne dès maintenant</p>
+    <a href="/" class="btn-primary">Réserver</a>
+  </header>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <h2>Nos Services</h2>
+    <div class="grid">
+      <div class="card">Transport maritime</div>
+      <div class="card">Manutention portuaire</div>
+      <div class="card">Consignation</div>
+      <div class="card">Avitaillement</div>
+      <div class="card">Formation maritime</div>
+    </div>
+  </section>
+
+  <section id="fleet" class="section">
+  <h2>Notre flotte</h2>
+  <div class="fleet-gallery">
+    <img src="{{ url_for('static', filename='images/aguene.png') }}" alt="Navire 1" class="fleet-img">
+    <img src="{{ url_for('static', filename='images/diambogne.png') }}" alt="Navire 2" class="fleet-img">
+    <img src="{{ url_for('static', filename='images/Aline_SD.png') }}" alt="Navire 3" class="fleet-img">
+  </div>
+</section>
+
+  <!-- Statistiques -->
+  <section id="stats" class="section">
+    <h2>Nos chiffres clés</h2>
+    <div class="stats">
+      <div><strong>1 431 340+</strong><br>Passagers transportés</div>
+      <div><strong>1 060 303+</strong><br>Tonnes de marchandises</div>
+      <div><strong>3</strong><br>Navires en service</div>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section id="about" class="section">
+    <h2>À propos</h2>
+    <p>
+      Depuis 2008, COSAMA assure la liaison maritime entre Dakar et Ziguinchor.
+      Notre flotte moderne vous garantit un voyage confortable, sécurisé et ponctuel.
+    </p>
+    <p>
+      Cosoma vous propose une expérience unique de navigation sur les eaux du Sénégal.
+      Profitez d’un service sécurisé, accessible et respectueux de l’environnement.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+   <p>&copy; 2025 Cosoma. Tous droits réservés.</p>
+    <p class="marque">DigitSolution </p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

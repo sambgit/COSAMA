@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Créer un administrateur</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_list.css') }}">
+</head>
+<body>
+  <div id="add-user-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">×</span>
+        <h1>Ajouter un administrateur</h1>
+        {% if message %}
+          <p><strong>{{ message }}</strong></p>
+        {% endif %}
+        <form action="{{ url_for('create_admin') }}" id="user-form" method="post">
+          <label>Nom d'utilisateur
+            <input type="text" name="username" required />
+          </label>
+          <label>Mot de passe
+            <input type="password" name="password" required />
+          </label>
+          <button type="submit">Créer</button>
+        </form>
+      </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("add-user-modal").style.display = "block";
+    });
+  </script>
+  <script>
+    window.onclick = function(event) {
+      const modal = document.getElementById("add-user-modal");
+      if (event.target === modal) {
+        window.location.href = "/super_admin";
+      }
+    }
+    document.querySelector(".close").onclick = function() {
+      window.location.href = "/super_admin";
+    }
+  </script>
+</body>
+</html>

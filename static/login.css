@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: rgb(21, 61, 128); /* bleu foncé */
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+h1{
+    color: rgb(21, 61, 128);
+}
+
+::-webkit-input-placeholder {
+  color: #ccc;
+}
+
+.wrapper {
+  position: relative;
+  width: 800px;
+  height: 65vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 3px solid rgb(0, 153, 119); /* vert doux */
+  box-shadow: 0 0 50px rgba(0, 153, 119, 0.5);
+  background-color: #eff0f4; /* gris clair */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 35px;
+  color: rgb(21, 61, 128);
+}
+
+button{
+  border: radius;
+  outline: none;
+  width: 288px;
+  margin-top: 25px;
+  padding: 10px 0;
+  font-size: 20px;
+  border-radius: 40px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background: rgb(21, 61, 128);
+  color: #fff;
+}
+
+button:hover{
+    text-transform: uppercase;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+.input {
+  border: none;
+  outline: none;
+  background: none;
+  width: 260px;
+  margin-top: 40px;
+  padding-right: 10px;
+  font-size: 17px;
+  color: rgb(21, 61, 128);
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ccc;
+}
+input:hover{
+  text-transform: uppercase;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.in:last-child {
+  width: 120px;
+  background: #00b4d8;
+  transition: 0.5s;
+}
+inp:last-child:hover{
+  transition: 0.5s;
+}
+
+.link {
+  color: rgb(0, 153, 119);
+  text-decoration: none;
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 450px;
+  height: 390px;
+  background: linear-gradient(to right, rgb(0, 153, 119), rgb(21, 61, 128));
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%);
+  padding-right: 70px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.logo img {
+  width: 15em;
+  margin-bottom: 1em;
+}
+
+.wel_text {
+  font-size: 40px;
+  margin-top: -50px;
+  line-height: 50px;
+  color: #fff;
+}
+

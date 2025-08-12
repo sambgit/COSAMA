@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Réservation - Cosoma</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+      <div class="logo">
+        <img src="{{url_for('static', filename='images/logo_cosama.ico')}} " alt="Logo Cosama" >
+        <span>Cosama</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/home">Accueil</a></li>
+        <li><a href="/reserve">Réserver</a></li>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="menu-toggle"  onclick="toggleMenu()">☰</button>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+    <div class="drop">
+      <div class="content">
+        <h2 class="animate__heartBeat">Réserver</h2>
+        <form action="/reserve" method="post">
+          <div class="input">
+            <input type="text" id="prenom" name="prenom"  placeholder="Prénom complet" required>
+          </div>
+          <div class="input">
+            <input type="text" id="nom" name="nom" placeholder="Nom complet" required>
+          </div>
+          <div class="input">
+            <input type="tel" id="tel" name="tel" placeholder="Téléphone" pattern="[0-9]{8,15}" required>
+          </div>
+          <div class="input">
+            <input type="text" id="nin" name="nin" placeholder="NIN" minlength="6" required>
+          </div>
+
+          <div class="input">
+            <input type="submit" value="Réserver">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <a href="/menus" class="btn">Voir les menus</a>
+    <a href="/contact" class="btn signup">Contact</a>
+
+    </div>
+  </section>
+
+  <section id="about" class="section">
+      <h2>À propos</h2>
+      <p>
+        Cosoma vous propose une expérience unique de navigation sur les eaux du Sénégal.
+        Profitez d’un service sécurisé, accessible et respectueux de l’environnement.
+      </p>
+  </section>
+  <script>
+      function toggleMenu() {
+        const nav = document.getElementById('navLinks');
+        nav.classList.toggle('show');
+      }
+  </script>
+  <footer>
+    <p>&copy; 2025 Cosoma. Tous droits réservés.</p>
+    <p class="marque">DigitSolution </p>
+  </footer>
+</body>
+</html>

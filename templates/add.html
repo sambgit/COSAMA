@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ajouer client</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_list.css') }}">
+</head>
+<body>
+  <div id="add-user-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">×</span>
+      <h2>Ajouter réservation</h2>
+      <form action="{{ url_for('add_reservation') }}" id="user-form" method="post">
+        <label >Prénom
+        <input type="text" id ="prenom" name="prenom" required>
+        </label>
+        <label >Nom
+        <input type="text" id="nom" name="nom" required>
+        </label>
+        <label >Téléphone
+        <input type="tel" id="tel" name="tel" required>
+        </label>
+        <label >NIN
+        <input type="number" id="nin" name="nin" required>
+        </label>
+        <button type="submit">Enregistrer</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("add-user-modal").style.display = "block";
+    });
+  </script>
+  <script>
+    window.onclick = function(event) {
+      const modal = document.getElementById("add-user-modal");
+      if (event.target === modal) {
+        window.location.href = "/admin";
+      }
+    }
+    document.querySelector(".close").onclick = function() {
+      window.location.href = "/admin";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Admin Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_list.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">Gestion des admins</div>
+      <ul>
+        <li class="active"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="#"><i class="fas fa-users"></i> Users</a></li>
+        <li><a href="#"><i class="fas fa-box"></i> Products</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        <li><a href="{{ url_for('logout_super') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-left">
+          <h1>Dashboard</h1>
+        </div>
+        <div class="header-right">
+          <form class="search-bar" action="{{ url_for('search_admin') }}" method="get">
+              <input id="search-input"
+                   type="text"
+                   name="a"
+                   placeholder="Rechercher..." value="{{ a or '' }}">
+              <i class="fas fa-search"></i>
+          </form>
+          <div class="notifications">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </div>
+          <div class="user-profile">
+            <img src="https://via.placeholder.com/40" alt="User">
+            <div class="dropdown">
+              <a href="#">Settings</a>
+              <a href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <div class="card">
+          <h2>Clients</h2>
+          <a href="/super_admin/create" id="add-admin-btn" class="btn">Ajouter un admin</a>
+             <p id="result-count" style="margin: 10px 0; font-weight: bold;"></p>
+             {% if admins %}
+                <table id="filtered-table" style="display:none;" >
+                  <thead>
+                    <tr>
+                      <th>Non d'utillisateur</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="results-body">
+                          {% for admin in admins %}
+                      <tr>
+                          <td>{{ admin[0] }}</td>
+                          <td>{{ admin[1] }}</td>
+                          <td>
+                            <a href="/edit_admin/{{ admin[0] }}" class="button">Modifier</a>
+                            <a href="/delete_admin/{{ admin[0] }}" class="button danger" onclick="return confirm('Supprimer ?');">Supprimer</a>
+                          </td>
+                      </tr>
+                          {% endfor %}
+                          {% else %}
+                   <tr><td colspan="6">Aucun résultat pour "{{a}}"</td></tr>
+                  </tbody>
+                </table>
+          {% endif %}
+          <script>
+                  const initialData = {{ admins | tojson  | safe }};
+          </script>
+
+          {% if admins %}
+              <table id="full-table">
+                <thead>
+                  <tr>
+                  <th>Non d'utillisateur</th>
+                      <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="full-body">
+                  {% for admin in admins %}
+            <tr>
+                <td>{{ admin[0] }}</td>
+                <td>{{ admin[1] }}</td>
+              <td>
+                  <a href="/edit_admin/{{ admin[0] }}" class="button">Modifier</a>
+                  <a href="/delete_admin/{{ admin[0] }}" class="button danger" onclick="return confirm('Supprimer ?');">Supprimer</a>
+              </td>
+            </tr>
+                  {% endfor %}
+                  {% else %}
+            <tr><td colspan="6">Aucun résultat pour "{{a}}"</td></tr>
+                </tbody>
+              </table>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='researchdyn_sup_admin.js') }}"></script>
+  <script src="{{ url_for('static', filename='scriptsup_admin.js') }}"></script>
+</body>
+</html>

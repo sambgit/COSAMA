@@ -1,0 +1,68 @@
+<!-- templates/search.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recherche de clients</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_list.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Rechercher les clients</h1>
+
+    <!-- Formulaire de recherche -->
+    <form action="{{ url_for('search_person') }}" method="get">
+      <input
+        type="text"
+        name="q"
+        placeholder="Rechercher par NIN, numéro, prénom ou nom"
+        value="{{ q|default('') }}"
+        id = "search-input"
+        required
+      >
+      <button type="submit">🔍</button>
+    </form>
+        <!-- Affichage des résultats si q n’est pas vide -->
+        {% if q %}
+          <h2>Résultats pour « {{q}} » ({{reservation|length}}) de trouvées</h2>
+          {% if reservation %}
+            <table id="user-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Prénom</th>
+                  <th>Nom</th>
+                  <th>Tel</th>
+                  <th>NIN</th>
+                  <th>Date</th>
+
+                </tr>
+              </thead>
+              <tbody id="results-body">
+                {% for row in reservation %}
+                <tr>
+                  <td>{{ row[0] }}</td>
+                  <td>{{ row[1] }}</td>
+                  <td>{{ row[2] }}</td>
+                  <td>{{ row[3] }}</td>
+                  <td>{{ row [4] }}</td>
+                  <td>{{ row [5] }}</td>
+                  <td>
+                     <a href="{{ url_for('edit', id=row[0]) }}" class="button">Modifier</a>
+                     <a href="{{ url_for('delete', id=row[0]) }}" class="button danger" style="display:inline;"
+                        onclick="return confirm('Vous voulez vraiment supprimer ?')">Supprimer</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>Aucun résultat trouvé.</p>
+          {% endif %}
+        {% endif %}
+    </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='research.js') }}"></script>
+</body>
+</html>

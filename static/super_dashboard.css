@@ -1,0 +1,31 @@
+/* Tableau moderne */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid var(--gray);
+  text-align: center;
+  background-color: var(--white);
+  border-radius: 0.3rem;
+}
+
+thead {
+  background-color: var(--blue-light);
+  color: var(--dark);
+  font-weight: bold;
+}
+
+tbody tr:hover {
+  background-color: #f5faff;
+}
+
+h2 {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--blue-dark);
+}
