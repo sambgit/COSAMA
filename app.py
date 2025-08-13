@@ -20,13 +20,6 @@ def get_db_connection():
         password=os.getenv('DB_PASSWORD'),
         port=os.getenv('DB_PORT', 5432)
     )
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM admins")
-    rows = cur.fetchall()
-    cur.close()
-    conn.close()
-
 
 # Initialisation des tables
 def init_db():
@@ -84,6 +77,7 @@ def init_db():
                 generate_password_hash("superadmin123")
             ))
         conn.commit()
+        cur.close()
         conn.close()
 
     except Exception as e:
@@ -116,6 +110,7 @@ def reserve():
         SELECT COUNT(*) FROM reservations WHERE prenom=? AND nom=? AND nin=?
     ''', (prenom, nom, nin))
     if cur.fetchone()[0] > 0:
+        cur.close()
         conn.close()
         return "Client déjà enregistré", 409
 
@@ -124,6 +119,7 @@ def reserve():
         VALUES (?, ?, ?, ?)
     ''', (prenom, nom, tel, nin))
     conn.commit()
+    cur.close()
     conn.close()
 
     return render_template('confirmation.html', prenom=prenom, nom=nom)
