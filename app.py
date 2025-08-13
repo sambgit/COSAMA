@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, flash, jsonify
-import sqlite3
+import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from dotenv import load_dotenv
@@ -12,10 +12,25 @@ app.secret_key = os.getenv('SECRET_KEY')  # remplace par quelque chose de solide
 app.permanent_session_lifetime = timedelta(hours=1)
 DB_PATH = 'booking.db'
 
+def get_db_connection():
+    return psycopg2.connect(
+        host=os.getenv('DB_HOST'),
+        database=os.getenv('DB_NAME'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'),
+        port=os.getenv('DB_PORT', 5432)
+    )
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM admins")
+    rows = cur.fetchall()
+    cur.close()
+    conn.close()
+
 
 # Initialisation des tables
 def init_db():
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
 
     # Supprime l’ancienne table
@@ -89,7 +104,7 @@ def reserve():
     tel = request.form.get('tel')
     nin = request.form.get('nin')
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
 
     # Vérification de redondance
@@ -112,7 +127,7 @@ def reserve():
 @app.route('/super_admin/search', methods=['GET'])
 def search_admin():
     a = request.args.get('a', '').strip()
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
     if a:
         like_a = f"%{a}%"
@@ -154,7 +169,7 @@ def create_admin():
         password = request.form['password']
         hashed_pw = generate_password_hash(password)
 
-        conn = sqlite3.connect(DB_PATH)
+        conn = get_db_connection()
         cur = conn.cursor()
 
         try:
@@ -163,7 +178,7 @@ def create_admin():
                             username, hashed_pw))
             conn.commit()
             message = "Admin ajouté avec succès"
-        except sqlite3.IntegrityError:
+        except psycopg2.IntegrityError:
             message = "Ce nom d’utilisateur existe déjà"
         conn.close()
 
@@ -177,7 +192,7 @@ def create_admin():
 def edit_admin(id):
     if 'super_admins' not in session:
         return redirect('/login_super')
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cursor = conn.cursor()
 
     if request.method == 'POST':
@@ -210,7 +225,7 @@ def delete_admin(id):
     if 'super_admins' not in session:
         return redirect('/login_super')
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('DELETE FROM admins WHERE id=?', (id,))
     conn.commit()
@@ -223,7 +238,7 @@ def super_admin():
     if 'super_admins' not in session:
         return redirect('/login_super')
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('SELECT * FROM admins ORDER BY created_at DESC')
     admins = cur.fetchall()
@@ -242,7 +257,7 @@ def login_super():
         user = request.form['username']
         pw = request.form['password']
 
-        conn = sqlite3.connect(DB_PATH)
+        conn = get_db_connection()
         cur = conn.cursor()
         cur.execute('SELECT password FROM super_admins WHERE username = ?', (user,))
         data = cur.fetchone()
@@ -266,7 +281,7 @@ def logout_super():
 @app.route('/search', methods=['GET'])
 def search_person():
     q = request.args.get('q', '').strip()
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
     if q:
         like_q = f"%{q}%"
@@ -311,7 +326,7 @@ def login():
         user = request.form['username']
         pw = request.form['password']
 
-        conn = sqlite3.connect(DB_PATH)
+        conn = get_db_connection()
         cur = conn.cursor()
         cur.execute('SELECT password FROM admins WHERE username = ?', (user,))
         data = cur.fetchone()
@@ -334,7 +349,7 @@ def logout():
 def admin():
     if 'admin' not in session:
         return redirect('/login')
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('SELECT * FROM reservations ORDER BY created_at DESC')
     reservations = cur.fetchall()
@@ -358,7 +373,7 @@ def add_reservation():
     if request.method == 'GET':
         return render_template("add.html")
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
 
     prenom = request.form['prenom']
@@ -388,7 +403,7 @@ def edit(id):
     if 'admin' not in session:
         return redirect('/login')
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
 
     if request.method == 'POST':
@@ -416,7 +431,7 @@ def delete(id):
     if 'admin' not in session:
         return redirect('/login')
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_db_connection()
     cur = conn.cursor()
     cur.execute('DELETE FROM reservations WHERE id=?', (id,))
     conn.commit()
