@@ -107,7 +107,7 @@ def reserve():
 
     # Vérification de redondance
     cur.execute('''
-        SELECT COUNT(*) FROM reservations WHERE prenom=%s AND nom=? AND nin=%s
+        SELECT COUNT(*) FROM reservations WHERE prenom=%s AND nom=%s  AND nin=%s
     ''', (prenom, nom, nin))
     if cur.fetchone()[0] > 0:
         cur.close()
