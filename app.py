@@ -10,7 +10,7 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')  # remplace par quelque chose de solide
 app.permanent_session_lifetime = timedelta(hours=1)
-DB_PATH = 'booking.db'
+
 
 def get_db_connection():
     return psycopg2.connect(
