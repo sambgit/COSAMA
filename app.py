@@ -212,7 +212,7 @@ def edit_admin(id):
     return render_template('edit_admin.html', sup_admin=sup_admin)
 
     # Préremplir les champs
-    cursor.execute("SELECT username FROM admin WHERE id=?", (id,))
+    cursor.execute("SELECT username FROM admin WHERE id=%s", (id,))
     result = cursor.fetchone()
     if result:
         form.username.data = result[0]
