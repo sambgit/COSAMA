@@ -30,60 +30,64 @@ def get_db_connection():
 
 # Initialisation des tables
 def init_db():
-    conn = get_db_connection()
-    cur = conn.cursor()
 
-    # Supprime l’ancienne table
-    # cur.execute('DROP TABLE IF EXISTS admins')
-    # cur.execute("ALTER TABLE IF EXISTS super_admins ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    cur.execute('''
-        CREATE TABLE IF NOT EXISTS super_admins (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL
-        )
-    ''')
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        # Supprime l’ancienne table
+        # cur.execute('DROP TABLE IF EXISTS admins')
+        # cur.execute("ALTER TABLE IF EXISTS super_admins ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+        cur.execute('''
+                CREATE TABLE IF NOT EXISTS super_admins (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT UNIQUE NOT NULL,
+                    password TEXT NOT NULL
+                )
+            ''')
 
-    cur.execute('''
-        CREATE TABLE IF NOT EXISTS reservations (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            prenom TEXT NOT NULL,
-            nom TEXT NOT NULL,
-            tel TEXT NOT NULL,
-            nin TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    ''')
+        cur.execute('''
+                CREATE TABLE IF NOT EXISTS reservations (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    prenom TEXT NOT NULL,
+                    nom TEXT NOT NULL,
+                    tel TEXT NOT NULL,
+                    nin TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
 
-    cur.execute('''
-        CREATE TABLE IF NOT EXISTS admins (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    ''')
+        cur.execute('''
+                CREATE TABLE IF NOT EXISTS admins (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT UNIQUE NOT NULL,
+                    password TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            ''')
 
-    conn.commit()
+        conn.commit()
 
-    # Créer un admin par défaut si aucun n’existe
-    cur.execute("SELECT COUNT(*) FROM admins")
-    if cur.fetchone()[0] == 0:
-        cur.execute("INSERT INTO admins (username, password) VALUES (?, ?)", (
-            "admin",
-            generate_password_hash("admin123")
-        ))
-    conn.commit()
+        # Créer un admin par défaut si aucun n’existe
+        cur.execute("SELECT COUNT(*) FROM admins")
+        if cur.fetchone()[0] == 0:
+            cur.execute("INSERT INTO admins (username, password) VALUES (?, ?)", (
+                "admin",
+                generate_password_hash("admin123")
+            ))
+        conn.commit()
 
-    # Créer un superadmin par défaut si aucun n’existe
-    cur.execute("SELECT COUNT(*) FROM super_admins")
-    if cur.fetchone()[0] == 0:
-        cur.execute("INSERT INTO super_admins (username, password) VALUES (?, ?)", (
-            "superadmin",
-            generate_password_hash("superadmin123")
-        ))
-    conn.commit()
-    conn.close()
+        # Créer un superadmin par défaut si aucun n’existe
+        cur.execute("SELECT COUNT(*) FROM super_admins")
+        if cur.fetchone()[0] == 0:
+            cur.execute("INSERT INTO super_admins (username, password) VALUES (?, ?)", (
+                "superadmin",
+                generate_password_hash("superadmin123")
+            ))
+        conn.commit()
+        conn.close()
+
+    except Exception as e:
+        print("Erreur de connexion")
 
 
 # Page client
