@@ -259,7 +259,7 @@ def login_super():
 
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('SELECT password FROM super_admins WHERE username = ?', (user,))
+        cur.execute('SELECT password FROM super_admins WHERE username = %s', (user,))
         data = cur.fetchone()
         conn.close()
 
@@ -328,7 +328,7 @@ def login():
 
         conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('SELECT password FROM admins WHERE username = ?', (user,))
+        cur.execute('SELECT password FROM admins WHERE username = %s', (user,))
         data = cur.fetchone()
         conn.close()
 
