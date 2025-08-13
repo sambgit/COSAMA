@@ -135,8 +135,8 @@ def search_admin():
         cur.execute("""
           SELECT id, username
           FROM admins
-          WHERE id          LIKE ?
-             OR username    LIKE ?
+          WHERE id          LIKE %s
+             OR username    LIKE %s
 
         """, (like_a, like_a))
 
@@ -289,10 +289,10 @@ def search_person():
         cur.execute("""
           SELECT id, prenom, nom, tel, nin, created_at
           FROM reservations
-          WHERE prenom    LIKE ?
-             OR nom    LIKE ?
-             OR tel LIKE ?
-             OR nin LIKE ?
+          WHERE prenom    LIKE %s
+             OR nom    LIKE %s
+             OR tel LIKE %s
+             OR nin LIKE %s
     
         """, (like_q, like_q, like_q, like_q))
 
