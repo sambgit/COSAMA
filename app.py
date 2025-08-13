@@ -32,7 +32,7 @@ def init_db():
         # cur.execute("ALTER TABLE IF EXISTS super_admins ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
         cur.execute('''
                 CREATE TABLE IF NOT EXISTS super_admins (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id SERIAL PRIMARY KEY ,
                     username TEXT UNIQUE NOT NULL,
                     password TEXT NOT NULL
                 )
@@ -40,7 +40,7 @@ def init_db():
 
         cur.execute('''
                 CREATE TABLE IF NOT EXISTS reservations (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id SERIAL PRIMARY KEY,
                     prenom TEXT NOT NULL,
                     nom TEXT NOT NULL,
                     tel TEXT NOT NULL,
@@ -51,7 +51,7 @@ def init_db():
 
         cur.execute('''
                 CREATE TABLE IF NOT EXISTS admins (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id SERIAL  PRIMARY KEY ,
                     username TEXT UNIQUE NOT NULL,
                     password TEXT NOT NULL,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -63,7 +63,7 @@ def init_db():
         # Créer un admin par défaut si aucun n’existe
         cur.execute("SELECT COUNT(*) FROM admins")
         if cur.fetchone()[0] == 0:
-            cur.execute("INSERT INTO admins (username, password) VALUES (?, ?)", (
+            cur.execute("INSERT INTO admins (username, password) VALUES (%s, %s)", (
                 "admin",
                 generate_password_hash("admin123")
             ))
@@ -72,7 +72,7 @@ def init_db():
         # Créer un superadmin par défaut si aucun n’existe
         cur.execute("SELECT COUNT(*) FROM super_admins")
         if cur.fetchone()[0] == 0:
-            cur.execute("INSERT INTO super_admins (username, password) VALUES (?, ?)", (
+            cur.execute("INSERT INTO super_admins (username, password) VALUES (%s, %s)", (
                 "superadmin",
                 generate_password_hash("superadmin123")
             ))
@@ -107,7 +107,7 @@ def reserve():
 
     # Vérification de redondance
     cur.execute('''
-        SELECT COUNT(*) FROM reservations WHERE prenom=? AND nom=? AND nin=?
+        SELECT COUNT(*) FROM reservations WHERE prenom=%s AND nom=? AND nin=%s
     ''', (prenom, nom, nin))
     if cur.fetchone()[0] > 0:
         cur.close()
@@ -116,7 +116,7 @@ def reserve():
 
     cur.execute('''
         INSERT INTO reservations (prenom, nom, tel, nin)
-        VALUES (?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s)
     ''', (prenom, nom, tel, nin))
     conn.commit()
     cur.close()
@@ -174,7 +174,7 @@ def create_admin():
 
         try:
             cur.execute("INSERT INTO admins "
-                        "(username, password) VALUES (?, ?)", (
+                        "(username, password) VALUES (%s, %s)", (
                             username, hashed_pw))
             conn.commit()
             message = "Admin ajouté avec succès"
@@ -198,7 +198,7 @@ def edit_admin(id):
     if request.method == 'POST':
         new_username = request.form['new_username']
         new_password = request.form['new_password']
-        cursor.execute("UPDATE admins SET username=?, password=? WHERE id=?", (
+        cursor.execute("UPDATE admins SET username=%s, password=%s WHERE id=%s", (
             new_username, generate_password_hash(new_password), id,
         ))
         conn.commit()
@@ -206,7 +206,7 @@ def edit_admin(id):
         flash("Admin modifié avec succès")
         return redirect('/super_admin')
 
-    cursor.execute('SELECT * FROM admins WHERE id=?', (id,))
+    cursor.execute('SELECT * FROM admins WHERE id=%s', (id,))
     sup_admin = cursor.fetchone()
     conn.close()
     return render_template('edit_admin.html', sup_admin=sup_admin)
@@ -227,7 +227,7 @@ def delete_admin(id):
 
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('DELETE FROM admins WHERE id=?', (id,))
+    cur.execute('DELETE FROM admins WHERE id=%s', (id,))
     conn.commit()
     conn.close()
     return redirect('/super_admin')
@@ -382,7 +382,7 @@ def add_reservation():
     nin = request.form['nin']
 
     cur.execute('''
-        SELECT COUNT(*) FROM reservations WHERE prenom=? AND nom=? AND nin=?
+        SELECT COUNT(*) FROM reservations WHERE prenom=%s AND nom=%s AND nin=%s
     ''', (prenom, nom, nin))
     if cur.fetchone()[0] > 0:
         conn.close()
@@ -390,7 +390,7 @@ def add_reservation():
 
     cur.execute('''
         INSERT INTO reservations (prenom, nom, tel, nin)
-        VALUES (?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s)
     ''', (prenom, nom, tel, nin))
     conn.commit()
     conn.close()
@@ -413,13 +413,13 @@ def edit(id):
         nin = request.form['nin']
 
         cur.execute('''
-            UPDATE reservations SET prenom=?, nom=?, tel=?, nin=? WHERE id=?
+            UPDATE reservations SET prenom=%s, nom=%s, tel=%s, nin=%s WHERE id=%s
         ''', (prenom, nom, tel, nin, id))
         conn.commit()
         conn.close()
         return redirect('/admin')
 
-    cur.execute('SELECT * FROM reservations WHERE id=?', (id,))
+    cur.execute('SELECT * FROM reservations WHERE id=%s', (id,))
     res = cur.fetchone()
     conn.close()
     return render_template('edit.html', res=res)
@@ -433,7 +433,7 @@ def delete(id):
 
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('DELETE FROM reservations WHERE id=?', (id,))
+    cur.execute('DELETE FROM reservations WHERE id=%s', (id,))
     conn.commit()
     conn.close()
     return redirect('/admin')
