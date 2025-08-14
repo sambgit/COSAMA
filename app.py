@@ -11,7 +11,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')  # remplace par quelque chose de solide
 app.permanent_session_lifetime = timedelta(hours=1)
 
-
 def get_db_connection():
     return psycopg2.connect(
         host=os.getenv('DB_HOST'),
@@ -93,7 +92,6 @@ def index():
 @app.route('/home')
 def home():
     return render_template('home.html')
-
 
 @app.route('/reserve', methods=['POST'])
 def reserve():
@@ -438,9 +436,51 @@ def delete(id):
     conn.close()
     return redirect('/admin')
 
+@app.route('/api/personnes', methods=['GET'])
+def api_personnes():
+    token = request.headers.get('Authorization')
+
+    # Vérifie le token
+    if token != "Bearer {os.getenv('API_TOKEN')}":
+        return jsonify({"error": "Unauthorized"}), 401
+
+
+    q = request.args.get('q', '').strip()
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+
+    if q:
+        like_q = f"%{q}%"
+        cur.execute("""
+                    SELECT id, prenom, nom, tel, nin, created_at
+                    FROM reservations
+                    WHERE prenom ILIKE %s OR nom ILIKE %s OR tel ILIKE %s OR nin ILIKE %s
+                """, (like_q, like_q, like_q, like_q))
+
+    else:
+        cur.execute("""
+                    SELECT id, prenom, nom, tel, nin, created_at
+                    FROM reservations
+                    ORDER BY created_at DESC
+                """)
+        rows = cur.fetchall()
+        cur.close()
+        conn.close()
+
+        # Convertir en liste de dictionnaires
+        results = [{
+            "id": r[0],
+            "prenom": r[1],
+            "nom": r[2],
+            "tel": r[3],
+            "nin": r[4],
+            "created_at": r[5].isoformat()
+        } for r in rows]
+
+        return jsonify(results)
 
 init_db()
 
 if __name__ == '__main__':
     app.run(debug=True)
-
