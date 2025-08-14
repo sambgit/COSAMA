@@ -439,11 +439,13 @@ def delete(id):
 @app.route('/api/personnes', methods=['GET'])
 def api_personnes():
     token = request.headers.get('Authorization')
+    expected_token = f"Bearer {os.getenv('API_TOKEN')}"
 
+    print("🔐 Token reçu :", token)
+    print("🔐 Token attendu :", expected_token)
     # Vérifie le token
     if token != f"Bearer {os.getenv('API_TOKEN')}":
         return jsonify({"error": "Unauthorized"}), 401
-
 
     q = request.args.get('q', '').strip()
     conn = get_db_connection()
