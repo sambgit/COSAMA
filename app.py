@@ -441,7 +441,7 @@ def api_personnes():
     token = request.headers.get('Authorization')
 
     # Vérifie le token
-    if token != "Bearer {os.getenv('API_TOKEN')}":
+    if token != f"Bearer {os.getenv('API_TOKEN')}":
         return jsonify({"error": "Unauthorized"}), 401
 
 
